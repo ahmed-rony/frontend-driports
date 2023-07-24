@@ -1,0 +1,9 @@
+
+ @font-face { font-display: swap; font-style : normal; src: url("assets/fonts/OutfitSemiBold.ttf"); font-family : "Outfit"; font-weight : 600;  }
+ @font-face { font-display: swap; font-style : normal; src: url("assets/fonts/OutfitRegular.ttf"); font-family : "Outfit"; font-weight : 400;  }
+ @font-face { font-display: swap; font-style : normal; src: url("assets/fonts/OutfitBold.ttf"); font-family : "Outfit"; font-weight : 700;  }
+ @font-face { font-display: swap; font-style : normal; src: url("assets/fonts/OutfitMedium.ttf"); font-family : "Outfit"; font-weight : 500;  }
+ @font-face { font-display: swap; font-style : normal; src: url("assets/fonts/NunitoBlack.ttf"); font-family : "Nunito"; font-weight : 900;  }
+ @font-face { font-display: swap; font-style : normal; src: url("assets/fonts/MontserratRegular.ttf"); font-family : "Montserrat"; font-weight : 400;  }
+ @font-face { font-display: swap; font-style : normal; src: url("assets/fonts/InterRegular.ttf"); font-family : "Inter"; font-weight : 400;  }
+ @font-face { font-display: swap; font-style : normal; src: url("assets/fonts/InterSemiBold.ttf"); font-family : "Inter"; font-weight : 600;  }
