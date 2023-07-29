@@ -1,0 +1,62 @@
+.report_page {
+  margin-top: 20px;
+  .reports {
+    width: 100%;
+    max-height: 420px;
+    overflow: scroll;
+
+    .report_item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 35px;
+      height: 70px;
+
+      .repo_title {
+        flex: 4;
+        display: flex;
+        align-items: center;
+        gap: 19px;
+        font-size: 16px;
+        font-family: "Outfit";
+        font-weight: 600;
+
+        span {
+          width: 30px;
+          height: 30px;
+          background: #fff;
+          color: #438eff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 5px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -ms-border-radius: 5px;
+          -o-border-radius: 5px;
+        }
+        p {
+          line-height: 24px;
+          color: #fff;
+        }
+      }
+      .repo_link {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        span {
+          color: #fff;
+          width: 100px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-left: 1px solid #74abff;
+          border-right: 1px solid #74abff;
+        }
+      }
+    }
+  }
+}

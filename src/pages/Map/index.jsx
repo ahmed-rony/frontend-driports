@@ -1,72 +1,14 @@
 import React from "react";
 
-import { Menu, MenuItem } from "react-pro-sidebar";
-
 import { Img, Text } from "components";
 import Sidebar1 from "components/Sidebar1";
 
 const MapPage = () => {
-  const sideBarMenu = [
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_materialsymbolsdashboard_blue_100_01.svg"
-          alt="materialsymbols"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_mdifilereport_blue_100_01.svg"
-          alt="mdifilereport"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-[42px] w-[42px]"
-          src="images/img_healthiconstruckdriver_blue_100_01.svg"
-          alt="healthiconstruc"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_fluentvehiclecar16filled_blue_100_01.svg"
-          alt="fluentvehicleca"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-[26px] text-blue-100_01"
-          src="images/img_location_blue_a200.svg"
-          alt="location"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_typcnmessages.svg"
-          alt="typcnmessages"
-        />
-      ),
-    },
-  ];
 
   return (
     <>
       <div className="bg-gray-50 flex sm:flex-col md:flex-col flex-row font-outfit sm:gap-5 md:gap-5 items-start mx-auto w-full">
-        <Sidebar1 className="!sticky !w-[99px] bg-blue-50 flex h-screen md:hidden justify-start overflow-auto md:px-5 top-[0]" />
+        
         <div className="flex-1 h-[1024px] md:px-5 relative w-full">
           <Img
             className="h-[1024px] m-auto object-cover w-full"
@@ -157,26 +99,6 @@ const MapPage = () => {
                   </Text>
                 </div>
               </div>
-            </div>
-            <div className="bg-blue-A200 flex flex-col items-start justify-end md:ml-[0] ml-[846px] mr-[19px] p-[19px] rounded-[10px]">
-              <Text
-                className="leading-[150.00%] mt-3 text-gray-50_02 text-xl w-[99%] sm:w-full"
-                size="txtOutfitSemiBold20Gray5002"
-              >
-                Agresion verbal en Ens. Ozama por Emily Dorson
-              </Text>
-              <Text
-                className="mt-1.5 text-gray-300 text-sm"
-                size="txtOutfitRegular14Gray300"
-              >
-                12.05.2023
-              </Text>
-              <Text
-                className="mt-[27px] text-base text-white-A700"
-                size="txtOutfitRegular16WhiteA700"
-              >
-                View Report
-              </Text>
             </div>
           </div>
         </div>

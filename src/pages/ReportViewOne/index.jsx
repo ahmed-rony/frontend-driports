@@ -1,75 +1,16 @@
 import React from "react";
 
 import { CircularProgressbar } from "react-circular-progressbar";
-import { Menu, MenuItem } from "react-pro-sidebar";
-
 import { Button, Img, Line, List, Text } from "components";
-import Sidebar1 from "components/Sidebar1";
 
 import "react-circular-progressbar/dist/styles.css";
 
 const ReportViewOnePage = () => {
-  const sideBarMenu = [
-    {
-      label: (
-        <Img
-          className="h-8 text-blue-A200 w-8"
-          src="images/img_materialsymbolsdashboard_blue_100_01.svg"
-          alt="materialsymbols"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_mdifilereport_blue_a200.svg"
-          alt="mdifilereport"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-[42px] w-[42px]"
-          src="images/img_healthiconstruckdriver.svg"
-          alt="healthiconstruc"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_fluentvehiclecar16filled.svg"
-          alt="fluentvehicleca"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-[26px]"
-          src="images/img_location.svg"
-          alt="location"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_typcnmessages.svg"
-          alt="typcnmessages"
-        />
-      ),
-    },
-  ];
 
   return (
     <>
       <div className="bg-gray-50 flex sm:flex-col md:flex-col flex-row font-outfit sm:gap-5 md:gap-5 items-start mx-auto w-full">
-        <Sidebar1 className="!sticky !w-[99px] bg-blue-50 flex h-screen md:hidden justify-start overflow-auto md:px-5 top-[0]" />
+        
         <div className="bg-white-A700 flex flex-1 flex-col items-center justify-start mb-7 md:ml-[0] ml-[13px] md:mt-0 mt-[9px] p-3.5 md:px-5 w-full">
           <div className="flex flex-col items-center justify-start my-1 w-full">
             <div className="flex flex-row sm:gap-10 items-center justify-between w-full">

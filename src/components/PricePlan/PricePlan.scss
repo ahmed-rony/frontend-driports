@@ -1,0 +1,117 @@
+.price-plan {
+  .content {
+    display: flex;
+    gap: 20px;
+
+    .item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      padding: 20px 0;
+      background: #222;
+      color: #fff;
+      transition: all ease 0.2s;
+      -webkit-transition: all ease 0.2s;
+      -moz-transition: all ease 0.2s;
+      -ms-transition: all ease 0.2s;
+      -o-transition: all ease 0.2s;
+      
+      &:hover {
+          background: #000;
+}
+
+      h4 {
+        font-size: 24px;
+        font-family: "Outfit";
+        font-weight: 700;
+      }
+
+      .details {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 20px 0;
+
+        .permonth {
+          span {
+            font-size: 50px;
+            font-weight: bold;
+          }
+        }
+
+        h5 {
+          font-size: 16px;
+          font-weight: 600;
+          margin: 20px 0 0;
+          text-align: center;
+          margin-bottom: 5px;
+        }
+
+        span {
+          font-size: 14px;
+          font-weight: 400;
+        }
+
+        button {
+          width: 40%;
+          padding: 10px;
+          margin: 30px 0 10px;
+          background: #3a6cb6;
+          color: #fff;
+          border-radius: 3px;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          -ms-border-radius: 3px;
+          -o-border-radius: 3px;
+        }
+      }
+
+      hr {
+        width: 85%;
+        height: 1px;
+      }
+
+      .feature {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 25px 30px 10px;
+        gap: 7px;
+
+        h5 {
+          font-size: 22px;
+          font-weight: 600;
+          color: #01522d;
+        }
+
+        .list {
+          display: flex;
+          gap: 5px;
+
+          .f-icon {
+            font-size: 20px;
+          }
+        }
+
+        span {
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+      }
+    }
+
+    .highlightbg {
+      background: #fad16a !important;
+      color: #000;
+      transition: all ease 0.4s;
+      -webkit-transition: all ease 0.4s;
+      -moz-transition: all ease 0.4s;
+      -ms-transition: all ease 0.4s;
+      -o-transition: all ease 0.4s;
+    }
+  }
+}

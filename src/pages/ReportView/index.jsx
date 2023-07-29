@@ -1,72 +1,40 @@
-import React from "react";
-
-import { Menu, MenuItem } from "react-pro-sidebar";
+import React, { useContext } from "react";
 
 import { Img, Line, List, Text } from "components";
-import Sidebar1 from "components/Sidebar1";
+import AuthContext from "utils/Reducers/AuthReducer";
+import { useQuery } from "react-query";
+import { newRequest } from "utils/newRequest";
+import { useLocation } from "react-router-dom";
 
 const ReportViewPage = () => {
-  const sideBarMenu = [
-    {
-      label: (
-        <Img
-          className="h-8 text-blue-A200 w-8"
-          src="images/img_materialsymbolsdashboard_blue_100_01.svg"
-          alt="materialsymbols"
-        />
-      ),
+  const { currentUser } = useContext(AuthContext);
+  const token = currentUser ? currentUser?.data?.token : null;
+
+  const reportId = useLocation().pathname.split("/")[2];
+
+  const header = {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
     },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_mdifilereport_blue_a200.svg"
-          alt="mdifilereport"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-[42px] w-[42px]"
-          src="images/img_healthiconstruckdriver.svg"
-          alt="healthiconstruc"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_fluentvehiclecar16filled.svg"
-          alt="fluentvehicleca"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-[26px]"
-          src="images/img_location.svg"
-          alt="location"
-        />
-      ),
-    },
-    {
-      label: (
-        <Img
-          className="h-8 w-8"
-          src="images/img_typcnmessages.svg"
-          alt="typcnmessages"
-        />
-      ),
-    },
-  ];
+  };
+
+  const {
+    isLoading: reportLoading,
+    error: reportError,
+    data: report,
+  } = useQuery({
+    queryKey: ["report"],
+    queryFn: async () =>
+      await newRequest
+        .get(`/client/api/v1/reports/${reportId}`, header)
+        .then((res) => {
+          return res.data;
+        }),
+  });
 
   return (
     <>
       <div className="bg-gray-50 flex sm:flex-col md:flex-col flex-row font-outfit sm:gap-5 md:gap-5 items-start mx-auto w-full">
-        <Sidebar1 className="!sticky !w-[99px] bg-blue-50 flex h-screen md:hidden justify-start overflow-auto md:px-5 top-[0]" />
         <div className="bg-white-A700 flex flex-1 flex-col items-center justify-start mb-7 md:ml-[0] ml-[13px] md:mt-0 mt-[9px] p-[13px] md:px-5 w-full">
           <div className="flex flex-col items-start justify-start mb-3.5 mt-[5px] w-full">
             <div className="flex flex-row sm:gap-10 items-center justify-between w-full">
@@ -109,10 +77,10 @@ const ReportViewPage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;reportType&#125; in &#123;location&#125; of
+                  &#123;reportType&#125; in &#123;{report?.data?.location}&#125; of
                   &#123;driver&#125;
                   <br />
-                  Alta velocidad en el Ens. Ozama por Cristian Bake
+                  Alta velocidad en el Ens. Ozama por {report?.data?.profileName}
                 </>
               </Text>
             </div>
@@ -183,7 +151,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    Av. Venezuela No. 24
+                    {report?.data?.location}
                   </Text>
                 </div>
                 <div className="flex flex-row items-center justify-between mt-5 w-[87%] md:w-full">
@@ -197,7 +165,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    Cristian Bake
+                    {report?.data?.profileName}
                   </Text>
                 </div>
                 <div className="flex flex-row items-start justify-between mt-[19px] w-[81%] md:w-full">
@@ -211,7 +179,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    A1920293
+                    {report?.data?.plate}
                   </Text>
                 </div>
               </div>

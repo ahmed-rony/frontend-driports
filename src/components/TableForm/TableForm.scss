@@ -1,0 +1,90 @@
+.new_account {
+  background: #eee;
+  padding: 40px 20px;
+
+  .account {
+    display: flex;
+    gap: 30px;
+
+    .left,
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        label {
+          font-size: 18px;
+          font-weight: 300;
+          color: #353535;
+        }
+        img {
+          max-width: 100px;
+          object-fit: contain;
+          margin: 10px 0;
+        }
+        .wage {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        input,
+        textarea {
+          border: 1px solid #ddd;
+          outline: none;
+          padding: 15px 10px;
+          background: #fff;
+
+          &::placeholder {
+            color: #cacaca;
+          }
+        }
+        form {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .adding-inp {
+          width: 80%;
+        }
+        .adding-btn {
+          width: 18%;
+          height: 95%;
+        }
+        .added_item {
+          padding-top: 10px;
+          .addings {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+
+            button {
+              font-size: 14px;
+              width: inherit;
+              padding: 3px 10px;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              border: 1px solid #333;
+              background: transparent;
+            }
+          }
+        }
+        select {
+          border: 1px solid #ddd;
+          outline: none;
+          padding: 15px 10px;
+        }
+      }
+      button {
+        width: 40%;
+        padding: 10px;
+      }
+    }
+  }
+}

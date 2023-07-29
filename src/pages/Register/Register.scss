@@ -1,0 +1,39 @@
+.payment {
+  width: 1140px;
+  margin: 0 auto;
+  padding: 40px 0 60px;
+
+  .title {
+    h1 {
+      text-align: center;
+      font-size: 40px;
+      font-family: "Outfit";
+      font-weight: 600;
+      color: #3a6cb6;
+      padding-bottom: 30px;
+    }
+  }
+
+  .stepper-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    button {
+      padding: 10px 30px;
+      background: #3a6cb6;
+      color: #fff;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+    }
+  }
+  .steppers {
+    padding-bottom: 30px;
+  }
+  .d-none{
+    display: none;
+  }
+}

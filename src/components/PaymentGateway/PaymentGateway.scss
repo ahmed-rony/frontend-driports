@@ -1,0 +1,21 @@
+.paymentGateway {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  .payment-btn {
+    background: #3a6cb6;
+    color: #fff;
+    padding: 15px 50px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: not-allowed;
+    &:hover{
+        background: #1a4a92;
+    }
+}
+}
