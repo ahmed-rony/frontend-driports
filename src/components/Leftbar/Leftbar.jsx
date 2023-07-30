@@ -34,6 +34,8 @@ const Leftbar = () => {
       dispatch({ type: "LOGOUT" });
       navigate("/login");
     } catch (error) {
+      dispatch({ type: "LOGOUT" });
+      navigate("/login");
       console.log(error);
     }
   }, []);
