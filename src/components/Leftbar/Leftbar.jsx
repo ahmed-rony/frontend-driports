@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./Leftbar.scss";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import { Img } from "components";
 import AuthContext from "utils/Reducers/AuthReducer";
 import { newRequest } from "utils/newRequest";
+import jwtDecode from "jwt-decode";
 
 const Leftbar = () => {
   const [selected, setSelected] = useState(false);
@@ -18,7 +19,16 @@ const Leftbar = () => {
     },
   };
 
-  const handleLogout = async () => {
+  // const handleLogout = async () => {
+  //   try {
+  //     await newRequest.post("/client/auth/logout", {}, header);
+  //     dispatch({ type: "LOGOUT" });
+  //     navigate("/login");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const handleLogout = useCallback(async() => {
     try {
       await newRequest.post("/client/auth/logout", {}, header);
       dispatch({ type: "LOGOUT" });
@@ -26,7 +36,25 @@ const Leftbar = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+
+      const decodedToken = jwtDecode(token);
+      const tokenExpirationTime = decodedToken.exp;
+      const expirationTimestampMs = tokenExpirationTime * 1000;
+
+      const currentTimestampMs = Date.now();
+      const timeRemainingMs = expirationTimestampMs - currentTimestampMs;
+
+      const logoutTimer = setTimeout(() => {
+        handleLogout();
+      }, timeRemainingMs);
+
+      return () => clearTimeout(logoutTimer);
+    }
+  }, [token,handleLogout])
 
   const Item = ({ title, icon, selected, setSelected }) => {
     return (
