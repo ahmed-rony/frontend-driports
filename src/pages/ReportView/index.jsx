@@ -6,6 +6,8 @@ import { useQuery } from "react-query";
 import { newRequest } from "utils/newRequest";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "mapbox-gl/dist/mapbox-gl.css";
+import Mapbox from "components/Mapbox/Mapbox";
 
 const ReportViewPage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -32,6 +34,7 @@ const ReportViewPage = () => {
           return res.data;
         }),
   });
+  console.log(report);
 
   return (
     <>
@@ -53,7 +56,10 @@ const ReportViewPage = () => {
                 <div className="border border-blue-300 border-solid flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src={process.env.PUBLIC_URL + "images/img_materialsymbolsbookmark.svg"}
+                    src={
+                      process.env.PUBLIC_URL +
+                      "images/img_materialsymbolsbookmark.svg"
+                    }
                     alt="materialsymbols"
                   />
                 </div>
@@ -78,10 +84,8 @@ const ReportViewPage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;{report?.data?.description}&#125; in &#123;{report?.data?.location}&#125;
-                  of &#123;{report?.data?.profileName}&#125;
-                  <br />
-                  Alta velocidad en el Ens. Ozama por {report?.data?.profileName}
+                  {report?.data?.reportType} in
+                  {report?.data?.address} of {report?.data?.driverName}
                 </>
               </Text>
             </div>
@@ -130,7 +134,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    Jhon Wayne
+                    {report?.data?.profileName}
                   </Text>
                 </div>
                 <div className="flex flex-row items-center justify-between mt-[18px] w-[83%] md:w-full">
@@ -144,7 +148,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    High speed
+                    {report?.data?.reportType}
                   </Text>
                 </div>
                 <div className="flex flex-row items-center justify-between mt-4 w-full">
@@ -158,7 +162,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    {report?.data?.location}
+                    {report?.data?.address}
                   </Text>
                 </div>
                 <div className="flex flex-row items-center justify-between mt-5 w-[87%] md:w-full">
@@ -201,12 +205,7 @@ const ReportViewPage = () => {
               className="md:ml-[0] ml-[7px] mt-3 text-gray-600_02 text-xl w-[98%] sm:w-full"
               size="txtOutfitRegular20"
             >
-              Lorem ipsum dolor sit amet consectetur. Volutpat platea sagittis
-              semper elit fermentum et at amet. Semper id ullamcorper commodo
-              nec. Varius nisi lectus egestas nunc enim massa risus egestas.
-              Magnis in lobortis interdum ac ullamcorper nisi convallis diam
-              ullamcorper. Nunc amet habitant sed tempor phasellus a faucibus
-              elit.
+              {report?.data?.description}
             </Text>
             <Text
               className="md:ml-[0] ml-[246px] mt-[9px] text-gray-600_02 text-xl"
@@ -229,18 +228,11 @@ const ReportViewPage = () => {
           </div>
         </div>
         <div className="flex-1 h-[1024px] ml-3.5 md:ml-[0] md:px-5 relative w-full">
-          <Img
-            className="h-[1024px] m-auto object-cover w-full"
-            src="images/img_rectangle16.png"
-            alt="rectangleSixteen"
+          <Mapbox
+            lat={48.858093}
+            long={2.294694}
           />
-          <div className="absolute bg-blue_gray-100_63 border border-black-900_19 border-solid flex flex-col h-full inset-[0] items-start justify-center m-auto p-[212px] md:px-10 sm:px-5 w-full">
-            <Img
-              className="h-[104px] mb-[182px] mt-[314px]"
-              src="images/img_group39.svg"
-              alt="groupThirtyNine"
-            />
-          </div>
+          
         </div>
       </div>
     </>

@@ -4,8 +4,6 @@ import StripeCheckout from "react-stripe-checkout";
 import { newRequest } from "utils/newRequest";
 import RegContext from "utils/Reducers/RegReducer";
 
-const KEY =
-  "pk_test_51NYqpXJbuQvwhEJr8iYMNFzmOWAPr3EAqW22wC234qMHqE2E4ABeBgaZZxk0uZDGvyQwn5w0FolhVHsnzT1AO4SE00H2IiOmJz";
 
 const PaymentGateway = () => {
   const [stripeToken, setStripeToken] = useState(null);
@@ -49,7 +47,7 @@ const PaymentGateway = () => {
         description={`You have chosen the ${state?.pricePlan?.title} Plan`}
         amount={state?.pricePlan?.perMonth * 100}
         token={onToken}
-        stripeKey={KEY}
+        stripeKey={process.env.STRIPE_KEY}
       >
         <button disabled={state?.username === ''} className="payment-btn">Pay Now</button>
       </StripeCheckout>

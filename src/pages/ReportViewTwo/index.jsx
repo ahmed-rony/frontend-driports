@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 import { newRequest } from "utils/newRequest";
 import { Link } from "react-router-dom";
+import Mapbox from "components/Mapbox/Mapbox";
 
 const ReportViewTwoPage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -32,10 +33,17 @@ const ReportViewTwoPage = () => {
         }),
   });
 
+  const getDateYear = () => {
+    if (report?.data?.date) {
+      const date = new Date(report.data.date);
+      return date.getFullYear();
+    }
+    return null;
+  };
+
   return (
     <>
       <div className="bg-gray-50 flex sm:flex-col md:flex-col flex-row font-outfit sm:gap-5 md:gap-5 items-start mx-auto w-full">
-        
         <div className="bg-white-A700 flex flex-1 flex-col items-center justify-end mb-7 md:ml-[0] ml-[13px] md:mt-0 mt-[9px] md:px-5 w-full">
           <div className="flex flex-col items-start justify-start mt-4 w-[96%] md:w-full">
             <div className="flex flex-row sm:gap-10 items-center justify-between w-full">
@@ -78,44 +86,39 @@ const ReportViewTwoPage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;{report?.data?.description}&#125; in &#123;{report?.data?.location}&#125; of
-                  &#123;{report?.data?.profileName}&#125;
-                  <br />
-                  Alta velocidad en el Ens. Ozama por {report?.data?.profileName}
+                  {report?.data?.description} in {report?.data?.address} of
+                  {report?.data?.driverName}
                 </>
               </Text>
             </div>
             <div className="flex flex-col items-center justify-start mt-[17px] w-full">
               <div className="flex flex-col gap-3.5 items-center justify-start w-full">
                 <div className="flex flex-row gap-[72px] items-start justify-start w-auto sm:w-full">
-                <Link to={`/reportview/${report?.data?.id}`}>
-
-                  <Text
-                    className="text-gray-600_01 text-lg w-auto"
-                    size="txtOutfitMedium18"
+                  <Link to={`/reportview/${report?.data?.id}`}>
+                    <Text
+                      className="text-gray-600_01 text-lg w-auto"
+                      size="txtOutfitMedium18"
                     >
-                    Media
-                  </Text>
-                    </Link>
+                      Media
+                    </Text>
+                  </Link>
                   <div className="flex flex-col">
-
-                  <Text
-                    className="text-blue-A200 text-lg w-auto"
-                    size="txtOutfitSemiBold18"
-                  >
-                    Vehicle Details
-                  </Text>
-                  <Line className="bg-blue-A200 h-0.5 w-full" />
+                    <Text
+                      className="text-blue-A200 text-lg w-auto"
+                      size="txtOutfitSemiBold18"
+                    >
+                      Vehicle Details
+                    </Text>
+                    <Line className="bg-blue-A200 h-0.5 w-full" />
                   </div>
                   <Link to={`/reportviewone/${report?.data?.id}`}>
-
-                  <Text
-                    className="text-gray-600_01 text-lg w-auto"
-                    size="txtOutfitMedium18"
+                    <Text
+                      className="text-gray-600_01 text-lg w-auto"
+                      size="txtOutfitMedium18"
                     >
-                    Driver Details
-                  </Text>
-                    </Link>
+                      Driver Details
+                    </Text>
+                  </Link>
                 </div>
                 <Line className="bg-black-900_19 h-px w-full" />
               </div>
@@ -134,7 +137,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.profileName}
+                      {report?.data?.driverName}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
@@ -162,7 +165,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      Daihatsu
+                      {report?.data?.brand}
                     </Text>
                   </div>
                   <div className="flex flex-row items-start justify-between mt-5 w-[70%] md:w-full">
@@ -176,7 +179,7 @@ const ReportViewTwoPage = () => {
                       className="mt-0.5 text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      Hijet
+                      {report?.data?.model}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-4 w-[71%] md:w-full">
@@ -190,7 +193,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      2002
+                      {getDateYear}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[17px] w-full">
@@ -204,7 +207,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      Awo1921lk12ma129301
+                      {report?.data?.vin}
                     </Text>
                   </div>
                 </div>
@@ -230,18 +233,10 @@ const ReportViewTwoPage = () => {
           </div>
         </div>
         <div className="flex-1 h-[1024px] ml-3.5 md:ml-[0] md:px-5 relative w-full">
-          <Img
-            className="h-[1024px] m-auto object-cover w-full"
-            src="images/img_rectangle16.png"
-            alt="rectangleSixteen"
+        <Mapbox
+            lat={48.858093}
+            long={2.294694}
           />
-          <div className="absolute bg-blue_gray-100_63 border border-black-900_19 border-solid flex flex-col h-full inset-[0] items-start justify-center m-auto p-44 md:px-10 sm:px-5 w-full">
-            <Img
-              className="h-[93px] mb-[207px] mt-[372px] w-[92px]"
-              src="images/img_group39.svg"
-              alt="groupThirtyNine"
-            />
-          </div>
         </div>
       </div>
     </>

@@ -62,6 +62,7 @@ const DriversPage = () => {
           return res.data;
         }),
   });
+  console.log(driversList)
 
   const queryClient = useQueryClient();
   const mutation = useMutation({

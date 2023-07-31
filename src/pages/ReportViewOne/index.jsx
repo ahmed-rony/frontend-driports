@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 import { newRequest } from "utils/newRequest";
 import { Link } from "react-router-dom";
+import Mapbox from "components/Mapbox/Mapbox";
 
 const ReportViewOnePage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -80,10 +81,8 @@ const ReportViewOnePage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;{report?.data?.description}&#125; in &#123;{report?.data?.location}&#125; of
-                  &#123;{report?.data?.profileName}&#125;
-                  <br />
-                  Alta velocidad en el Ens. Ozama por {report?.data?.profileName}
+                  {report?.data?.reportType} in {report?.data?.address} of
+                  {report?.data?.driverName}
                 </>
               </Text>
             </div>
@@ -133,7 +132,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.profileName}
+                      {report?.data?.driverName}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[18px] w-[88%] md:w-full">
@@ -147,7 +146,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      0019203992
+                      {report?.data?.licenseNumber}
                     </Text>
                   </div>
                   <div className="flex sm:flex-col flex-row sm:gap-5 items-start justify-start mt-[19px] w-full">
@@ -161,7 +160,7 @@ const ReportViewOnePage = () => {
                       className="sm:ml-[0] ml-[143px] text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      7/19/2023
+                      {report?.data?.licenseExp}
                     </Text>
                     <Text
                       className="ml-2.5 sm:ml-[0] sm:mt-0 mt-[5px] text-red-A700_01 text-sm"
@@ -195,7 +194,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      High speeding
+                      {report?.data?.mostReport}
                     </Text>
                   </div>
                   <Text
@@ -259,18 +258,10 @@ const ReportViewOnePage = () => {
           </div>
         </div>
         <div className="flex-1 h-[1024px] ml-3.5 md:ml-[0] md:px-5 relative w-full">
-          <Img
-            className="h-[1024px] m-auto object-cover w-full"
-            src="images/img_rectangle16.png"
-            alt="rectangleSixteen"
+        <Mapbox
+            lat={48.858093}
+            long={2.294694}
           />
-          <div className="absolute bg-blue_gray-100_63 border border-black-900_19 border-solid flex flex-col h-full inset-[0] items-start justify-center m-auto p-[214px] md:px-10 sm:px-5 w-full">
-            <Img
-              className="h-24 mb-[182px] mt-[318px]"
-              src="images/img_group39.svg"
-              alt="groupThirtyNine"
-            />
-          </div>
         </div>
       </div>
     </>

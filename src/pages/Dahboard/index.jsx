@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import { newRequest } from "utils/newRequest";
 import { Link } from "react-router-dom";
 import "./Dashboard.scss";
+import Mapbox from "components/Mapbox/Mapbox";
 
 const DahboardPage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -257,49 +258,45 @@ const DahboardPage = () => {
                                   ? "Loading"
                                   : driversListError
                                   ? "Something went wrong"
-                                  : driversList?.data?.data
-                                      ?.map((d) => (
-                                        <div
-                                          key={d?.id}
-                                          className="driver_user"
-                                        >
-                                          <Img
-                                            className="h-[52px] md:h-auto mt-2 rounded-[50%] w-[52px]"
-                                            src="images/img_ellipse5.png"
-                                            alt="ellipseFive"
-                                          />
-                                          <div className="driver_info">
-                                            <div className="flex flex-col items-center justify-start ml-1 md:ml-[0]">
-                                              <Text
-                                                className="text-[9px] text-black-900"
-                                                size="txtOutfitSemiBold9"
-                                              >
-                                                {d?.name}
-                                              </Text>
-                                              <Text
-                                                className="text-[7.88px] text-black-900"
-                                                size="txtOutfitRegular788Black900"
-                                              >
-                                                License: {d?.licenseNumber}
-                                              </Text>
-                                            </div>
-                                            <div className=" risk">
-                                              <Text
-                                                className=" text-[7.88px] text-red-A700"
-                                                size="txtOutfitRegular788"
-                                              >
-                                                Risk : {d?.riskMatrix}
-                                              </Text>
-                                              <Text
-                                                className=" text-[7.88px] text-black-900"
-                                                size="txtOutfitRegular788Black900"
-                                              >
-                                                Times reported : 56
-                                              </Text>
-                                            </div>
+                                  : driversList?.data?.data?.map((d) => (
+                                      <div key={d?.id} className="driver_user">
+                                        <Img
+                                          className="h-[52px] md:h-auto mt-2 rounded-[50%] w-[52px]"
+                                          src="images/img_ellipse5.png"
+                                          alt="ellipseFive"
+                                        />
+                                        <div className="driver_info">
+                                          <div className="flex flex-col items-center justify-start ml-1 md:ml-[0]">
+                                            <Text
+                                              className="text-[9px] text-black-900"
+                                              size="txtOutfitSemiBold9"
+                                            >
+                                              {d?.name}
+                                            </Text>
+                                            <Text
+                                              className="text-[7.88px] text-black-900"
+                                              size="txtOutfitRegular788Black900"
+                                            >
+                                              License: {d?.licenseNumber}
+                                            </Text>
+                                          </div>
+                                          <div className=" risk">
+                                            <Text
+                                              className=" text-[7.88px] text-red-A700"
+                                              size="txtOutfitRegular788"
+                                            >
+                                              Risk : {d?.riskMatrix}
+                                            </Text>
+                                            <Text
+                                              className=" text-[7.88px] text-black-900"
+                                              size="txtOutfitRegular788Black900"
+                                            >
+                                              Times reported : 56
+                                            </Text>
                                           </div>
                                         </div>
-                                      ))}
+                                      </div>
+                                    ))}
                               </div>
                             </div>
                           </div>
@@ -308,11 +305,9 @@ const DahboardPage = () => {
                     </div>
                   </div>
                 </div>
-                <Img
-                  className="dashboard_map"
-                  src="images/img_rectangle11.png"
-                  alt="rectangleEleven"
-                />
+                <div className="dashboard_map">
+                  <Mapbox lat={48.858093} long={2.294694} />
+                </div>
               </div>
             </div>
           </div>
