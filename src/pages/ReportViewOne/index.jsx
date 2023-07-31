@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { CircularProgressbar } from "react-circular-progressbar";
 import { Button, Img, Line, List, Text } from "components";
 
 import "react-circular-progressbar/dist/styles.css";
+import AuthContext from "utils/Reducers/AuthReducer";
+import { useLocation } from "react-router-dom";
+import { useQuery } from "react-query";
+import { newRequest } from "utils/newRequest";
+import { Link } from "react-router-dom";
 
 const ReportViewOnePage = () => {
+  const { currentUser } = useContext(AuthContext);
+  const token = currentUser ? currentUser?.data?.token : null;
 
+  const reportId = useLocation().pathname.split("/")[2];
+
+  const header = {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+
+  const {
+    isLoading: reportLoading,
+    error: reportError,
+    data: report,
+  } = useQuery({
+    queryKey: ["report"],
+    queryFn: async () =>
+      await newRequest
+        .get(`/client/api/v1/reports/${reportId}`, header)
+        .then((res) => {
+          return res.data;
+        }),
+  });
   return (
     <>
       <div className="bg-gray-50 flex sm:flex-col md:flex-col flex-row font-outfit sm:gap-5 md:gap-5 items-start mx-auto w-full">
-        
         <div className="bg-white-A700 flex flex-1 flex-col items-center justify-start mb-7 md:ml-[0] ml-[13px] md:mt-0 mt-[9px] p-3.5 md:px-5 w-full">
           <div className="flex flex-col items-center justify-start my-1 w-full">
             <div className="flex flex-row sm:gap-10 items-center justify-between w-full">
@@ -53,36 +80,42 @@ const ReportViewOnePage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;reportType&#125; in &#123;location&#125; of
-                  &#123;driver&#125;
+                  &#123;{report?.data?.description}&#125; in &#123;location&#125; of
+                  &#123;{report?.data?.profileName}&#125;
                   <br />
-                  Alta velocidad en el Ens. Ozama por Cristian Bake
+                  Alta velocidad en el Ens. Ozama por {report?.data?.profileName}
                 </>
               </Text>
             </div>
             <div className="flex flex-col items-center justify-start mt-[17px] w-full">
               <div className="flex flex-col gap-3.5 items-center justify-start w-full">
                 <div className="flex flex-row gap-[72px] items-start justify-start w-auto sm:w-full">
-                  <Text
-                    className="text-gray-600_03 text-lg w-auto"
-                    size="txtOutfitMedium18Gray60003"
-                  >
-                    Media
-                  </Text>
-                  <Text
-                    className="text-gray-600_03 text-lg w-auto"
-                    size="txtOutfitSemiBold18Gray60003"
-                  >
-                    Vehicle Details
-                  </Text>
-                  <Text
-                    className="text-blue-A200 text-lg w-auto"
-                    size="txtOutfitMedium18BlueA200"
-                  >
-                    Driver Details
-                  </Text>
+                  <Link to={`/reportview/${report?.data?.id}`}>
+                    <Text
+                      className="text-gray-600_03 text-lg w-auto"
+                      size="txtOutfitMedium18Gray60003"
+                    >
+                      Media
+                    </Text>
+                  </Link>
+                  <Link to={`/reportviewtwo/${report?.data?.id}`}>
+                    <Text
+                      className="text-gray-600_03 text-lg w-auto"
+                      size="txtOutfitSemiBold18Gray60003"
+                    >
+                      Vehicle Details
+                    </Text>
+                  </Link>
+                  <div className="flex flex-col">
+                    <Text
+                      className="text-blue-A200 text-lg w-auto"
+                      size="txtOutfitMedium18BlueA200"
+                    >
+                      Driver Details
+                    </Text>
+                    <Line className="bg-blue-A200 h-0.5 w-full" />
+                  </div>
                 </div>
-                <Line className="bg-blue-A200 h-0.5 w-[27%]" />
                 <Line className="bg-black-900_19 h-px w-full" />
               </div>
             </div>
@@ -100,7 +133,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      Cristian Bake
+                      {report?.data?.profileName}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[18px] w-[88%] md:w-full">
@@ -148,7 +181,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      24
+                      {report?.data?.count}
                     </Text>
                   </div>
                   <div className="flex sm:flex-col flex-row sm:gap-10 gap-[66px] items-center justify-start mt-[19px] w-[91%] md:w-full">
@@ -188,7 +221,7 @@ const ReportViewOnePage = () => {
                 <div className="!w-[135px] border-solid h-[135px] m-auto overflow-visible">
                   <CircularProgressbar
                     className="!w-[135px] border-solid h-[135px] m-auto overflow-visible"
-                    value={40}
+                    value={report?.data?.riskMatrix}
                     strokeWidth={1}
                     styles={{
                       trail: { strokeWidth: 1, stroke: "" },
@@ -205,7 +238,7 @@ const ReportViewOnePage = () => {
                   className="absolute h-max inset-[0] justify-center m-auto sm:text-[25.89px] md:text-[27.89px] text-[29.89px] text-light_green-A700_01 w-max"
                   size="txtNunitoBlack2989"
                 >
-                  42.6%
+                  {report?.data?.riskMatrix}%
                 </Text>
               </div>
             </div>

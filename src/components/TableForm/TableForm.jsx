@@ -50,7 +50,7 @@ const TableForm = () => {
               <label htmlFor="">Password</label>
               <input
                 name="password"
-                type="text"
+                type="password"
                 placeholder="make it strong"
                 onChange={handleChange}
               />
@@ -65,15 +65,6 @@ const TableForm = () => {
                 <option value="role3">Role 3</option>
               </select>
             </div>
-            {/* <div className="item">
-              <label htmlFor="">Company ID</label>
-              <input
-                name="companyId"
-                type="text"
-                placeholder="e.g cb7542c5784b"
-                onChange={handleChange}
-              />
-            </div> */}
             <div className="item">
               <label htmlFor="">Mobile Number</label>
               <input

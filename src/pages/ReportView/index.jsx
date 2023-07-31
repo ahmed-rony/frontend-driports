@@ -5,6 +5,7 @@ import AuthContext from "utils/Reducers/AuthReducer";
 import { useQuery } from "react-query";
 import { newRequest } from "utils/newRequest";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ReportViewPage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -77,8 +78,8 @@ const ReportViewPage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;reportType&#125; in &#123;{report?.data?.location}&#125; of
-                  &#123;driver&#125;
+                  &#123;{report?.data?.description}&#125; in &#123;location&#125;
+                  of &#123;{report?.data?.profileName}&#125;
                   <br />
                   Alta velocidad en el Ens. Ozama por {report?.data?.profileName}
                 </>
@@ -87,26 +88,32 @@ const ReportViewPage = () => {
             <div className="flex flex-col items-center justify-start mt-[17px] w-full">
               <div className="flex flex-col gap-3.5 items-center justify-start w-full">
                 <div className="flex sm:flex-col flex-row sm:gap-10 gap-[72px] items-start justify-start w-auto sm:w-full">
-                  <Text
-                    className="text-blue-A200 text-lg w-auto"
-                    size="txtOutfitMedium18BlueA200"
-                  >
-                    Report details
-                  </Text>
-                  <Text
-                    className="text-gray-600_03 text-lg w-auto"
-                    size="txtOutfitSemiBold18Gray60003"
-                  >
-                    Vehicle Details
-                  </Text>
-                  <Text
-                    className="text-gray-600_01 text-lg w-auto"
-                    size="txtOutfitMedium18"
-                  >
-                    Driver Details
-                  </Text>
+                  <div className="flex flex-col">
+                    <Text
+                      className="text-blue-A200 text-lg w-auto"
+                      size="txtOutfitMedium18BlueA200"
+                    >
+                      Report details
+                    </Text>
+                    <Line className="bg-blue-A200 h-0.5 w-full" />
+                  </div>
+                  <Link to={`/reportviewtwo/${report?.data?.id}`}>
+                    <Text
+                      className="text-gray-600_03 text-lg w-auto"
+                      size="txtOutfitSemiBold18Gray60003"
+                    >
+                      Vehicle Details
+                    </Text>
+                  </Link>
+                  <Link to={`/reportviewone/${report?.data?.id}`}>
+                    <Text
+                      className="text-gray-600_01 text-lg w-auto"
+                      size="txtOutfitMedium18"
+                    >
+                      Driver Details
+                    </Text>
+                  </Link>
                 </div>
-                <Line className="bg-blue-A200 h-0.5 w-[27%]" />
                 <Line className="bg-black-900_19 h-px w-full" />
               </div>
             </div>

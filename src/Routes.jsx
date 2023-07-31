@@ -28,9 +28,9 @@ const ProjectRoutes = () => {
               {/* <Route path="/" element={<Home />} /> */}
               <Route path="/" element={<Dahboard />} />
               <Route path="/reports" element={<Reports />} />
-              <Route path="/reportviewtwo" element={<ReportViewTwo />} />
+              <Route path="/reportviewtwo/:id" element={<ReportViewTwo />} />
               <Route path="/reportview/:id" element={<ReportView />} />
-              <Route path="/reportviewone" element={<ReportViewOne />} />
+              <Route path="/reportviewone/:id" element={<ReportViewOne />} />
               <Route path="/drivers" element={<Drivers />} />
               <Route path="/driversone" element={<DriversOne />} />
               <Route path="/vehicle" element={<Vehicle />} />

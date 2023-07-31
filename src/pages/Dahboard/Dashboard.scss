@@ -130,6 +130,21 @@
         }
     }
   }
+  .vehicles{
+    height: 370px;
+    .vehicle_list{
+      height: 250px;
+      overflow: scroll;
+    }
+  }
+  .drivers{
+    height: 380px;
+    .driver_list{
+      height: 340px;
+      overflow: scroll;
+
+    }
+  }
 
   .dashboard_map{
     margin-top: 20px;

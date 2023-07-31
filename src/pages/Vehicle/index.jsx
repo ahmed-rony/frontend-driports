@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { Button, Img, Input, Line, List, Text } from "components";
 
@@ -13,6 +13,7 @@ const VehiclePage = () => {
   const { currentUser } = useContext(AuthContext);
   const token = currentUser ? currentUser?.data?.token : null;
   const { state, dispatch } = useContext(VehicleContext);
+  const [err, setErr] = useState(null);
 
   const handleChange = (e) => {
     dispatch({
@@ -63,6 +64,7 @@ const VehiclePage = () => {
           return res.data;
         }),
   });
+  console.log(vehiclesList);
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
@@ -77,7 +79,17 @@ const VehiclePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await mutation.mutateAsync(state);
+      if (
+        state.vin &&
+        state.brand &&
+        state.model &&
+        state.color &&
+        state.plate
+      ) {
+        await mutation.mutateAsync(state);
+      }else{
+        setErr("Fields are empty")
+      }
     } catch (error) {
       console.log(error);
     }
@@ -259,15 +271,13 @@ const VehiclePage = () => {
                         />
                       </div>
                     </List>
-                    <Button className="bg-blue_gray-100 cursor-pointer leading-[normal] min-w-[98px] md:ml-[0] ml-[31px] mr-[339px] mt-[17px] py-[7px] rounded-[15px] text-center text-gray-500 text-xs">
+                    <div className="bg-blue_gray-100 cursor-pointer leading-[normal] min-w-[98px] md:ml-[0] ml-[31px] mr-[339px] mt-[17px] py-[7px] rounded-[15px] text-center text-gray-500 text-xs">
                       Add Image
-                    </Button>
-                    <button
-                      type="submit"
-                      className="bg-gradient  cursor-pointer leading-[normal] min-w-[134px] md:ml-[0] ml-[171px] mt-[9px] py-3.5 rounded-[10px] text-center text-lg text-white-A700"
-                    >
+                    </div>
+                    <button type="submit" className="bg-gradient sub-btn">
                       Add Vehicle
                     </button>
+                    {err && <small className="err">{err}</small>}
                   </form>
                 </div>
               </div>

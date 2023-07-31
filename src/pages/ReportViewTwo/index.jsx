@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Img, Input, Line, List, Text } from "components";
+import AuthContext from "utils/Reducers/AuthReducer";
+import { useLocation } from "react-router-dom";
+import { useQuery } from "react-query";
+import { newRequest } from "utils/newRequest";
+import { Link } from "react-router-dom";
 
 const ReportViewTwoPage = () => {
+  const { currentUser } = useContext(AuthContext);
+  const token = currentUser ? currentUser?.data?.token : null;
+
+  const reportId = useLocation().pathname.split("/")[2];
+
+  const header = {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+
+  const {
+    isLoading: reportLoading,
+    error: reportError,
+    data: report,
+  } = useQuery({
+    queryKey: ["report"],
+    queryFn: async () =>
+      await newRequest
+        .get(`/client/api/v1/reports/${reportId}`, header)
+        .then((res) => {
+          return res.data;
+        }),
+  });
 
   return (
     <>
@@ -49,36 +78,45 @@ const ReportViewTwoPage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;reportType&#125; in &#123;location&#125; of
-                  &#123;driver&#125;
+                  &#123;{report?.data?.description}&#125; in &#123;location&#125; of
+                  &#123;{report?.data?.profileName}&#125;
                   <br />
-                  Alta velocidad en el Ens. Ozama por Cristian Bake
+                  Alta velocidad en el Ens. Ozama por {report?.data?.profileName}
                 </>
               </Text>
             </div>
             <div className="flex flex-col items-center justify-start mt-[17px] w-full">
               <div className="flex flex-col gap-3.5 items-center justify-start w-full">
                 <div className="flex flex-row gap-[72px] items-start justify-start w-auto sm:w-full">
+                <Link to={`/reportview/${report?.data?.id}`}>
+
                   <Text
                     className="text-gray-600_01 text-lg w-auto"
                     size="txtOutfitMedium18"
-                  >
+                    >
                     Media
                   </Text>
+                    </Link>
+                  <div className="flex flex-col">
+
                   <Text
                     className="text-blue-A200 text-lg w-auto"
                     size="txtOutfitSemiBold18"
                   >
                     Vehicle Details
                   </Text>
+                  <Line className="bg-blue-A200 h-0.5 w-full" />
+                  </div>
+                  <Link to={`/reportviewone/${report?.data?.id}`}>
+
                   <Text
                     className="text-gray-600_01 text-lg w-auto"
                     size="txtOutfitMedium18"
-                  >
+                    >
                     Driver Details
                   </Text>
+                    </Link>
                 </div>
-                <Line className="bg-blue-A200 h-0.5 w-[27%]" />
                 <Line className="bg-black-900_19 h-px w-full" />
               </div>
             </div>
@@ -96,7 +134,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      Cristian Bake
+                      {report?.data?.profileName}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
@@ -110,7 +148,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      A129912
+                      {report?.data?.plate}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[18px] w-[78%] md:w-full">

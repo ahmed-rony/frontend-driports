@@ -174,7 +174,7 @@ const DahboardPage = () => {
                   </div>
                 </div>
 
-                <div className="h-[369px] md:h-[636px] sm:h-[895px] mt-[11px] relative w-full">
+                <div className="vehicles md:h-[636px] sm:h-[895px] mt-[11px] relative w-full">
                   <div className="absolute bg-white-A700 border border-black-900_19 border-solid flex flex-col h-full inset-[0] items-center justify-center m-auto p-[17px] rounded-[10px] w-full">
                     <div className="flex flex-col gap-[35px] items-start justify-start mt-[13px] w-[98%] md:w-full">
                       <div className="info_header vehicle_header">
@@ -186,14 +186,14 @@ const DahboardPage = () => {
                         <h2>Most reported vehicles</h2>
                       </div>
                       <List
-                        className="sm:flex-col flex-row gap-[7px] grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center w-full"
+                        className="sm:flex-col vehicle_list flex-row gap-[7px] grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center w-full"
                         orientation="horizontal"
                       >
                         {vehiclesListLoading
                           ? "Loading"
                           : vehiclesListError
                           ? "Something went wrong"
-                          : vehiclesList?.data?.data?.slice(0, 3).map((v) => (
+                          : vehiclesList?.data?.data?.map((v) => (
                               <div
                                 key={v?.id}
                                 className="bg-gray-50 flex flex-1 flex-col gap-[9px] items-start justify-center p-[9px] rounded-[10px] w-full"
@@ -248,18 +248,17 @@ const DahboardPage = () => {
                         />
                       </div>
                       <Line className="bg-black-900_19 h-px mt-[11px] w-full" />
-                      <div className="h-[270px] md:h-[304px] sm:h-[829px] mt-[21px] relative w-[96%] sm:w-full">
+                      <div className="drivers md:h-[304px] sm:h-[829px] mt-[21px] relative w-[96%] sm:w-full">
                         <div className="absolute h-[270px] md:h-[283px] sm:h-[808px] inset-[0] justify-center m-auto w-[98%] sm:w-full">
                           <div className="absolute flex flex-col h-full inset-[0] items-center justify-center m-auto w-full">
                             <div className="flex flex-col items-center justify-start w-full">
-                              <div className="sm:gap-5 gap-[47px] grid sm:grid-cols-1 grid-cols-3 justify-center min-h-[auto] w-full">
+                              <div className="sm:gap-5 driver_list gap-[47px] grid sm:grid-cols-1 grid-cols-3 justify-center min-h-[auto] w-full">
                                 {driversListLoading
                                   ? "Loading"
                                   : driversListError
                                   ? "Something went wrong"
                                   : driversList?.data?.data
-                                      ?.slice(0, 6)
-                                      .map((d) => (
+                                      ?.map((d) => (
                                         <div
                                           key={d?.id}
                                           className="driver_user"
