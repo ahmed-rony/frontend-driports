@@ -80,8 +80,10 @@ const DriversPage = () => {
         
       }else{
         setErr("Fields are empty")
+        e.preventDefault();
       }
     } catch (error) {
+      e.preventDefault();
       console.log(error);
     }
   };

@@ -77,7 +77,7 @@ const VehiclePage = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    
     try {
       if (
         state.vin &&
@@ -88,10 +88,12 @@ const VehiclePage = () => {
       ) {
         await mutation.mutateAsync(state);
       }else{
-        setErr("Fields are empty")
+        setErr("Fields are empty");
+        e.preventDefault();
       }
     } catch (error) {
       console.log(error);
+      e.preventDefault();
     }
   };
 
