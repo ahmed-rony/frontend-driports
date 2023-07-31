@@ -80,7 +80,7 @@ const ReportViewOnePage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;{report?.data?.description}&#125; in &#123;location&#125; of
+                  &#123;{report?.data?.description}&#125; in &#123;{report?.data?.location}&#125; of
                   &#123;{report?.data?.profileName}&#125;
                   <br />
                   Alta velocidad en el Ens. Ozama por {report?.data?.profileName}

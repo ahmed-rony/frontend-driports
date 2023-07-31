@@ -42,7 +42,7 @@ const ReportViewPage = () => {
               <div className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
                 <Img
                   className="h-4 w-4"
-                  src="images/img_pajamasgoback.svg"
+                  src={process.env.PUBLIC_URL + "images/img_pajamasgoback.svg"}
                   alt="pajamasgoback"
                 />
               </div>
@@ -53,14 +53,14 @@ const ReportViewPage = () => {
                 <div className="border border-blue-300 border-solid flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src="images/img_materialsymbolsbookmark.svg"
+                    src={process.env.PUBLIC_URL + "images/img_materialsymbolsbookmark.svg"}
                     alt="materialsymbols"
                   />
                 </div>
                 <div className="bg-blue-300 flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src="images/img_mdishare.svg"
+                    src={process.env.PUBLIC_URL + "images/img_mdishare.svg"}
                     alt="mdishare"
                   />
                 </div>
@@ -78,7 +78,7 @@ const ReportViewPage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  &#123;{report?.data?.description}&#125; in &#123;location&#125;
+                  &#123;{report?.data?.description}&#125; in &#123;{report?.data?.location}&#125;
                   of &#123;{report?.data?.profileName}&#125;
                   <br />
                   Alta velocidad en el Ens. Ozama por {report?.data?.profileName}
@@ -217,7 +217,7 @@ const ReportViewPage = () => {
             <div className="flex sm:flex-col flex-row gap-2.5 items-center justify-between mt-3 w-full">
               <Img
                 className="h-[222px] md:h-auto object-cover rounded-[10px]"
-                src="images/img_rectangle22.png"
+                src={process.env.PUBLIC_URL + "images/img_rectangle22.png"}
                 alt="rectangleTwentyTwo"
               />
               <Img

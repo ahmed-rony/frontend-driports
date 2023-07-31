@@ -64,7 +64,6 @@ const VehiclePage = () => {
           return res.data;
         }),
   });
-  console.log(vehiclesList);
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
