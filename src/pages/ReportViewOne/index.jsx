@@ -94,7 +94,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_03 text-lg w-auto"
                       size="txtOutfitMedium18Gray60003"
                     >
-                      Media
+                      Report details
                     </Text>
                   </Link>
                   <Link to={`/reportviewtwo/${report?.data?.id}`}>

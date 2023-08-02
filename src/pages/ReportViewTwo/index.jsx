@@ -99,7 +99,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_01 text-lg w-auto"
                       size="txtOutfitMedium18"
                     >
-                      Media
+                      Report details
                     </Text>
                   </Link>
                   <div className="flex flex-col">

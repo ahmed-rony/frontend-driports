@@ -45,7 +45,8 @@ const ReportViewPage = () => {
               <div className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
                 <Img
                   className="h-4 w-4"
-                  src={process.env.PUBLIC_URL + "images/img_pajamasgoback.svg"}
+                  // src={process.env.PUBLIC_URL + "images/img_pajamasgoback.svg"}
+                  src="./images/img_pajamasgoback.svg"
                   alt="pajamasgoback"
                 />
               </div>
@@ -56,10 +57,13 @@ const ReportViewPage = () => {
                 <div className="border border-blue-300 border-solid flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src={
-                      process.env.PUBLIC_URL +
-                      "images/img_materialsymbolsbookmark.svg"
-                    }
+                    src=
+                      "./images/img_materialsymbolsbookmark.svg"
+                    
+                    // src={
+                    //   process.env.PUBLIC_URL +
+                    //   "images/img_materialsymbolsbookmark.svg"
+                    // }
                     alt="materialsymbols"
                   />
                 </div>
@@ -176,7 +180,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    {report?.data?.profileName}
+                    {report?.data?.driverName}
                   </Text>
                 </div>
                 <div className="flex flex-row items-start justify-between mt-[19px] w-[81%] md:w-full">
@@ -216,14 +220,15 @@ const ReportViewPage = () => {
             <div className="flex sm:flex-col flex-row gap-2.5 items-center justify-between mt-3 w-full">
               <Img
                 className="h-[222px] md:h-auto object-cover rounded-[10px]"
-                src={process.env.PUBLIC_URL + "images/img_rectangle22.png"}
+                src="./images/img_rectangle22.png"
                 alt="rectangleTwentyTwo"
               />
-              <Img
+              <img
                 className="h-[222px] md:h-auto object-cover rounded-[10px]"
-                src="images/img_rectangle23.png"
+                src="./images/img_rectangle23.png"
                 alt="rectangleTwentyThree"
               />
+              <img src="./images/img_rectangle23.png" style={{width:'100px', height:"100px"}} alt="" />
             </div>
           </div>
         </div>
