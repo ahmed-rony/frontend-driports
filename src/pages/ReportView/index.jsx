@@ -34,7 +34,20 @@ const ReportViewPage = () => {
           return res.data;
         }),
   });
-  console.log(report);
+  
+  const lat =
+    Array.isArray(report?.data?.location) &&
+    typeof report?.data?.location[0]?.latitude === "number" &&
+    !isNaN(report?.data?.location[0]?.latitude)
+      ? report.data.location[0].latitude
+      : 40.776676;
+
+  const long =
+    Array.isArray(report?.data?.location) &&
+    typeof report?.data?.location[0]?.longitude === "number" &&
+    !isNaN(report?.data?.location[0]?.longitude)
+      ? report.data.location[0].longitude
+      : -73.971321;
 
   return (
     <>
@@ -45,8 +58,7 @@ const ReportViewPage = () => {
               <div className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
                 <Img
                   className="h-4 w-4"
-                  // src={process.env.PUBLIC_URL + "images/img_pajamasgoback.svg"}
-                  src="./images/img_pajamasgoback.svg"
+                  src="/images/img_pajamasgoback.svg"
                   alt="pajamasgoback"
                 />
               </div>
@@ -57,20 +69,14 @@ const ReportViewPage = () => {
                 <div className="border border-blue-300 border-solid flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src=
-                      "./images/img_materialsymbolsbookmark.svg"
-                    
-                    // src={
-                    //   process.env.PUBLIC_URL +
-                    //   "images/img_materialsymbolsbookmark.svg"
-                    // }
+                    src="images/img_materialsymbolsbookmark.svg"
                     alt="materialsymbols"
                   />
                 </div>
                 <div className="bg-blue-300 flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src={process.env.PUBLIC_URL + "images/img_mdishare.svg"}
+                    src="/images/img_mdishare.svg"
                     alt="mdishare"
                   />
                 </div>
@@ -88,8 +94,7 @@ const ReportViewPage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  {report?.data?.reportType} in
-                  {report?.data?.address} of {report?.data?.driverName}
+                  {report?.data?.reportType || "{ No Data }"} in {report?.data?.address || "{ No Data }"} of {report?.data?.driverName || "{ No Data }"}
                 </>
               </Text>
             </div>
@@ -138,7 +143,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    {report?.data?.profileName}
+                    {report?.data?.profileName || "{ No Data }"}
                   </Text>
                 </div>
                 <div className="flex flex-row items-center justify-between mt-[18px] w-[83%] md:w-full">
@@ -152,10 +157,10 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    {report?.data?.reportType}
+                    {report?.data?.reportType || "{ No Data }"}
                   </Text>
                 </div>
-                <div className="flex flex-row items-center justify-between mt-4 w-full">
+                <div className="flex flex-row items-center justify-between mt-5 w-[87%] md:w-full">
                   <Text
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitBold20"
@@ -166,7 +171,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    {report?.data?.address}
+                    {report?.data?.address || "{ No Data }"}
                   </Text>
                 </div>
                 <div className="flex flex-row items-center justify-between mt-5 w-[87%] md:w-full">
@@ -180,7 +185,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    {report?.data?.driverName}
+                    {report?.data?.driverName || "{ No Data }"}
                   </Text>
                 </div>
                 <div className="flex flex-row items-start justify-between mt-[19px] w-[81%] md:w-full">
@@ -194,7 +199,7 @@ const ReportViewPage = () => {
                     className="text-gray-600_02 text-xl"
                     size="txtOutfitRegular20"
                   >
-                    {report?.data?.plate}
+                    {report?.data?.plate || "{ No Data }"}
                   </Text>
                 </div>
               </div>
@@ -209,7 +214,7 @@ const ReportViewPage = () => {
               className="md:ml-[0] ml-[7px] mt-3 text-gray-600_02 text-xl w-[98%] sm:w-full"
               size="txtOutfitRegular20"
             >
-              {report?.data?.description}
+              {report?.data?.description || "{ No Data }"}
             </Text>
             <Text
               className="md:ml-[0] ml-[246px] mt-[9px] text-gray-600_02 text-xl"
@@ -220,24 +225,19 @@ const ReportViewPage = () => {
             <div className="flex sm:flex-col flex-row gap-2.5 items-center justify-between mt-3 w-full">
               <Img
                 className="h-[222px] md:h-auto object-cover rounded-[10px]"
-                src="./images/img_rectangle22.png"
+                src="/images/img_rectangle22.png"
                 alt="rectangleTwentyTwo"
               />
-              <img
+              <Img
                 className="h-[222px] md:h-auto object-cover rounded-[10px]"
-                src="./images/img_rectangle23.png"
+                src="/images/img_rectangle23.png"
                 alt="rectangleTwentyThree"
               />
-              <img src="./images/img_rectangle23.png" style={{width:'100px', height:"100px"}} alt="" />
             </div>
           </div>
         </div>
         <div className="flex-1 h-[1024px] ml-3.5 md:ml-[0] md:px-5 relative w-full">
-          <Mapbox
-            lat={48.858093}
-            long={2.294694}
-          />
-          
+          <Mapbox lat={lat} long={long} />
         </div>
       </div>
     </>

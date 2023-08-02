@@ -7,10 +7,11 @@ import React, { useState } from "react";
 
 const Mapbox = ({ lat, long }) => {
   const [viewport, setViewport] = useState({
-    latitude: lat || 48.858093,
-    longitude: long || 2.294694,
+    latitude: lat,
+    longitude: long,
     zoom: 13,
   });
+  console.log(viewport);
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <ReactMapGl

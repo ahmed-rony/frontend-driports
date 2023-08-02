@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./Navbar.scss";
 import { Img, Input, Text } from "components";
 import AuthContext from "utils/Reducers/AuthReducer";
-import { CloseSVG } from "assets/images";
+import { CloseSVG } from "assets//images";
 
 const Navbar = () => {
   const [groupthreevalue, setGroupthreevalue] = useState("");
@@ -15,7 +15,7 @@ const Navbar = () => {
           <div className="user_info">
             <Img
               className="h-[53px] md:h-auto rounded-[50%] w-[53px]"
-              src="images/img_ellipse1.png"
+              src="/images/img_ellipse1.png"
               alt="ellipseOne"
             />
             <div className="flex flex-col items-start justify-start">
@@ -54,7 +54,7 @@ const Navbar = () => {
                 ) : (
                   <Img
                     className="cursor-pointer h-5 ml-[35px] my-auto"
-                    src="images/img_search_blue_gray_900.svg"
+                    src="/images/img_search_blue_gray_900.svg"
                     alt="search"
                   />
                 )
@@ -63,7 +63,7 @@ const Navbar = () => {
             <div className="bg-blue-300 flex flex-col items-center justify-start p-4 rounded-[10px]">
               <Img
                 className="h-6 w-6"
-                src="images/img_solarbellbold.svg"
+                src="/images/img_solarbellbold.svg"
                 alt="solarbellbold"
               />
             </div>

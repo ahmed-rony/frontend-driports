@@ -112,7 +112,7 @@ const VehiclePage = () => {
                     ? "Loading"
                     : vehiclesError
                     ? "Something weent wrong"
-                    : vehiclesList?.data?.data.map((vehicle) => (
+                    : vehiclesList?.data?.data?.map((vehicle) => (
                         <div
                           key={vehicle?.id}
                           className="bg-white-A700 flex flex-1 flex-col gap-[15px] items-start justify-start p-2.5 rounded-[10px] w-full"

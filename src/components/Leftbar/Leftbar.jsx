@@ -76,7 +76,7 @@ const Leftbar = () => {
       <Menu className="menu">
         {/* LOGO */}
         <MenuItem className="header">
-          <Img src="images/img_folder.svg" alt="materialsymbols" />
+          <Img src="/images/img_folder.svg" alt="materialsymbols" />
         </MenuItem>
 
         <div className="navigation">
@@ -85,7 +85,7 @@ const Leftbar = () => {
               icon={
                 <Img
                   className="text-blue-A200"
-                  src="images/icons/dashboard.png"
+                  src="/images/icons/dashboard.png"
                   alt="materialsymbols"
                 />
               }
@@ -98,7 +98,7 @@ const Leftbar = () => {
               icon={
                 <Img
                   className="text-blue-A200"
-                  src="images/icons/report.png"
+                  src="/images/icons/report.png"
                   alt="materialsymbols"
                 />
               }
@@ -111,7 +111,7 @@ const Leftbar = () => {
               icon={
                 <Img
                   className="text-blue-A200"
-                  src="images/icons/driver.png"
+                  src="/images/icons/driver.png"
                   alt="materialsymbols"
                 />
               }
@@ -124,7 +124,7 @@ const Leftbar = () => {
               icon={
                 <Img
                   className="text-blue-A200"
-                  src="images/icons/vehicle.png"
+                  src="/images/icons/vehicle.png"
                   alt="materialsymbols"
                 />
               }
@@ -137,7 +137,7 @@ const Leftbar = () => {
               icon={
                 <Img
                   className="text-blue-A200 "
-                  src="images/icons/location.png"
+                  src="/images/icons/location.png"
                   alt="materialsymbols"
                 />
               }
@@ -150,7 +150,7 @@ const Leftbar = () => {
               icon={
                 <Img
                   className="text-blue-A200"
-                  src="images/icons/chat.png"
+                  src="/images/icons/chat.png"
                   alt="materialsymbols"
                 />
               }
@@ -165,7 +165,7 @@ const Leftbar = () => {
               icon={
                 <Img
                   className="text-blue-A200"
-                  src="images/icons/setting.png"
+                  src="/images/icons/setting.png"
                   alt="materialsymbols"
                 />
               }
@@ -179,7 +179,7 @@ const Leftbar = () => {
               icon={
                 <Img
                   className="text-blue-A200"
-                  src="images/icons/logout.png"
+                  src="/images/icons/logout.png"
                   alt="materialsymbols"
                 />
               }

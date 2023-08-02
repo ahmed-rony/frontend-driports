@@ -21,6 +21,7 @@ const Login = () => {
       window.location.href = "/";
     } catch (err) {
       dispatch({ type: "LOGIN_FAIL", payload: err?.response?.data });
+      console.log(err);
     }
   };
 

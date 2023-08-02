@@ -36,6 +36,19 @@ const ReportViewOnePage = () => {
           return res.data;
         }),
   });
+  const lat =
+    Array.isArray(report?.data?.location) &&
+    typeof report?.data?.location[0]?.latitude === "number" &&
+    !isNaN(report?.data?.location[0]?.latitude)
+      ? report.data.location[0].latitude
+      : 40.776676;
+
+  const long =
+    Array.isArray(report?.data?.location) &&
+    typeof report?.data?.location[0]?.longitude === "number" &&
+    !isNaN(report?.data?.location[0]?.longitude)
+      ? report.data.location[0].longitude
+      : -73.971321;
   return (
     <>
       <div className="bg-gray-50 flex sm:flex-col md:flex-col flex-row font-outfit sm:gap-5 md:gap-5 items-start mx-auto w-full">
@@ -45,7 +58,7 @@ const ReportViewOnePage = () => {
               <div className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
                 <Img
                   className="h-4 w-4"
-                  src="images/img_pajamasgoback.svg"
+                  src="/images/img_pajamasgoback.svg"
                   alt="pajamasgoback"
                 />
               </div>
@@ -56,14 +69,14 @@ const ReportViewOnePage = () => {
                 <div className="border border-blue-300 border-solid flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src="images/img_materialsymbolsbookmark.svg"
+                    src="/images/img_materialsymbolsbookmark.svg"
                     alt="materialsymbols"
                   />
                 </div>
                 <div className="bg-blue-300 flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src="images/img_mdishare.svg"
+                    src="/images/img_mdishare.svg"
                     alt="mdishare"
                   />
                 </div>
@@ -81,8 +94,8 @@ const ReportViewOnePage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  {report?.data?.reportType} in {report?.data?.address} of
-                  {report?.data?.driverName}
+                  {report?.data?.reportType || "{ No Data }"} in {report?.data?.address || "{ No Data }"} of
+                  {report?.data?.driverName || "{ No Data }"}
                 </>
               </Text>
             </div>
@@ -132,7 +145,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.driverName}
+                      {report?.data?.driverName || "{ No Data }"}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[18px] w-[88%] md:w-full">
@@ -146,7 +159,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.licenseNumber}
+                      {report?.data?.licenseNumber || "{ No Data }"}
                     </Text>
                   </div>
                   <div className="flex sm:flex-col flex-row sm:gap-5 items-start justify-start mt-[19px] w-full">
@@ -160,7 +173,7 @@ const ReportViewOnePage = () => {
                       className="sm:ml-[0] ml-[143px] text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.licenseExp}
+                      {report?.data?.licenseExp || "{ No Data }"}
                     </Text>
                     <Text
                       className="ml-2.5 sm:ml-[0] sm:mt-0 mt-[5px] text-red-A700_01 text-sm"
@@ -180,7 +193,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.count}
+                      {report?.data?.count || "{ No Data }"}
                     </Text>
                   </div>
                   <div className="flex sm:flex-col flex-row sm:gap-10 gap-[66px] items-center justify-start mt-[19px] w-[91%] md:w-full">
@@ -194,7 +207,7 @@ const ReportViewOnePage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.mostReport}
+                      {report?.data?.mostReport || "{ No Data }"}
                     </Text>
                   </div>
                   <Text
@@ -258,10 +271,7 @@ const ReportViewOnePage = () => {
           </div>
         </div>
         <div className="flex-1 h-[1024px] ml-3.5 md:ml-[0] md:px-5 relative w-full">
-        <Mapbox
-            lat={48.858093}
-            long={2.294694}
-          />
+        <Mapbox lat={lat} long={long} />
         </div>
       </div>
     </>

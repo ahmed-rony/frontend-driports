@@ -40,6 +40,19 @@ const ReportViewTwoPage = () => {
     }
     return null;
   };
+  const lat =
+    Array.isArray(report?.data?.location) &&
+    typeof report?.data?.location[0]?.latitude === "number" &&
+    !isNaN(report?.data?.location[0]?.latitude)
+      ? report.data.location[0].latitude
+      : 40.776676;
+
+  const long =
+    Array.isArray(report?.data?.location) &&
+    typeof report?.data?.location[0]?.longitude === "number" &&
+    !isNaN(report?.data?.location[0]?.longitude)
+      ? report.data.location[0].longitude
+      : -73.971321;
 
   return (
     <>
@@ -50,7 +63,7 @@ const ReportViewTwoPage = () => {
               <div className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
                 <Img
                   className="h-4 w-4"
-                  src="images/img_pajamasgoback.svg"
+                  src="/images/img_pajamasgoback.svg"
                   alt="pajamasgoback"
                 />
               </div>
@@ -61,14 +74,14 @@ const ReportViewTwoPage = () => {
                 <div className="border border-blue-300 border-solid flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src="images/img_materialsymbolsbookmark.svg"
+                    src="/images/img_materialsymbolsbookmark.svg"
                     alt="materialsymbols"
                   />
                 </div>
                 <div className="bg-blue-300 flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src="images/img_mdishare.svg"
+                    src="/images/img_mdishare.svg"
                     alt="mdishare"
                   />
                 </div>
@@ -86,8 +99,8 @@ const ReportViewTwoPage = () => {
                 size="txtOutfitSemiBold22"
               >
                 <>
-                  {report?.data?.description} in {report?.data?.address} of
-                  {report?.data?.driverName}
+                  {report?.data?.description || "{ No Data }"} in {report?.data?.address || "{ No Data }"} of
+                  {report?.data?.driverName || "{ No Data }"}
                 </>
               </Text>
             </div>
@@ -137,7 +150,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.driverName}
+                      {report?.data?.driverName || "{ No Data }"}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
@@ -151,7 +164,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.plate}
+                      {report?.data?.plate || "{ No Data }"}
                     </Text>
                   </div>
                   <div className="flex flex-row items-center justify-between mt-[18px] w-[78%] md:w-full">
@@ -165,10 +178,10 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.brand}
+                      {report?.data?.brand || "{ No Data }"}
                     </Text>
                   </div>
-                  <div className="flex flex-row items-start justify-between mt-5 w-[70%] md:w-full">
+                  <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
                     <Text
                       className="mb-0.5 text-gray-600_02 text-xl"
                       size="txtOutfitBold20"
@@ -179,10 +192,10 @@ const ReportViewTwoPage = () => {
                       className="mt-0.5 text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.model}
+                      {report?.data?.model || "{ No Data }"}
                     </Text>
                   </div>
-                  <div className="flex flex-row items-center justify-between mt-4 w-[71%] md:w-full">
+                  <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
                     <Text
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitBold20"
@@ -193,10 +206,10 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {getDateYear}
+                      {getDateYear || "{ No Data }"}
                     </Text>
                   </div>
-                  <div className="flex flex-row items-center justify-between mt-[17px] w-full">
+                  <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
                     <Text
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitBold20"
@@ -207,7 +220,7 @@ const ReportViewTwoPage = () => {
                       className="text-gray-600_02 text-xl"
                       size="txtOutfitRegular20"
                     >
-                      {report?.data?.vin}
+                      {report?.data?.vin || "{ No Data }"}
                     </Text>
                   </div>
                 </div>
@@ -221,7 +234,7 @@ const ReportViewTwoPage = () => {
             </Text>
             <Img
               className="h-[323px] sm:h-auto mt-3 object-cover rounded-[10px] w-full"
-              src="images/img_rectangle18_1.png"
+              src="/images/img_rectangle18_1.png"
               alt="rectangleTwentyTwo"
             />
             <Input
@@ -233,10 +246,7 @@ const ReportViewTwoPage = () => {
           </div>
         </div>
         <div className="flex-1 h-[1024px] ml-3.5 md:ml-[0] md:px-5 relative w-full">
-        <Mapbox
-            lat={48.858093}
-            long={2.294694}
-          />
+          <Mapbox lat={lat} long={long} />
         </div>
       </div>
     </>
