@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Img, Line, List, Text } from "components";
 import AuthContext from "utils/Reducers/AuthReducer";
 import { newRequest } from "utils/newRequest";
@@ -11,7 +11,11 @@ const DriversPage = () => {
   const { currentUser } = useContext(AuthContext);
   const token = currentUser ? currentUser?.data?.token : null;
   const { state, dispatch } = useContext(DriverContext);
-  const [err, setErr] = useState(null)
+  const [paging, setPaging] = useState(1);
+  const [err, setErr] = useState(null);
+  const [driversLoading, setDriversLoading] = useState(false);
+  const [driversError, setDriversError] = useState(null);
+  const [driversList, setDriversList] = useState(null);
 
   const handleChange = (e) => {
     dispatch({
@@ -27,42 +31,32 @@ const DriversPage = () => {
   };
 
   const props = {
-    query: {},
+    // query: {},
     options: {
-      select: ["field 1", "field 2"],
-      collation: "",
-      sort: "",
-      populate: "",
-      projection: "",
-      lean: false,
-      leanWithId: true,
-      offset: 0,
-      page: 1,
-      limit: 10,
-      pagination: true,
-      useEstimatedCount: false,
-      useCustomCountFn: false,
-      forceCountFn: false,
-      read: {},
-      options: {},
+      page: paging,
     },
-    isCountOnly: false,
   };
 
-  const {
-    isLoading: driversLoading,
-    error: driversError,
-    data: driversList,
-  } = useQuery({
-    queryKey: ["driversList"],
-    queryFn: async () =>
-      await newRequest
-        .post(`/client/api/v1/drivers/list`, {}, header)
-        .then((res) => {
-          return res.data;
-        }),
-  });
-  console.log(driversList)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setDriversLoading(true);
+        const response = await newRequest.post(
+          `/client/api/v1/drivers/list`,
+          props,
+          header
+        );
+        const data = response.data;
+        setDriversList(data);
+        setDriversLoading(false);
+      } catch (error) {
+        setDriversError(error);
+      }
+    };
+
+    fetchData();
+  }, [paging]);
+  console.log(driversList);
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
@@ -76,11 +70,10 @@ const DriversPage = () => {
 
   const handleSubmit = async (e) => {
     try {
-      if(state.name && state.licenseNumber && state.driverId){
+      if (state.name && state.licenseNumber && state.driverId) {
         await mutation.mutateAsync(state);
-        
-      }else{
-        setErr("Fields are empty")
+      } else {
+        setErr("Fields are empty");
         e.preventDefault();
       }
     } catch (error) {
@@ -117,7 +110,7 @@ const DriversPage = () => {
                   {driversLoading
                     ? "Loading"
                     : driversError
-                    ? "Something weent wrong"
+                    ? "Something went wrong"
                     : driversList?.data?.data.map((driver) => (
                         <div
                           key={driver?.id}
@@ -153,6 +146,23 @@ const DriversPage = () => {
                           </div>
                         </div>
                       ))}
+                </div>
+                <div className="pagination">
+                  <button
+                    className="page-btn"
+                    disabled={paging <= 1}
+                    onClick={() => setPaging((prev) => prev - 1)}
+                  >
+                    Previews
+                  </button>
+                  <span>{driversList?.data?.paginator?.currentPage}</span>
+                  <button
+                    className="page-btn"
+                    disabled={!driversList?.data?.paginator?.hasNextPage}
+                    onClick={() => setPaging((prev) => prev + 1)}
+                  >
+                    Next
+                  </button>
                 </div>
               </div>
               <div className="flex flex-col gap-[11px] items-center justify-start md:mt-0 mt-[5px] w-[37%] md:w-full">
@@ -271,10 +281,7 @@ const DriversPage = () => {
                     <div className="bg-blue_gray-100 cursor-pointer leading-[normal] min-w-[98px] md:ml-[0] ml-[31px] mr-[339px] mt-[17px] py-[7px] rounded-[15px] text-center text-gray-500 text-xs">
                       Add Image
                     </div>
-                    <button
-                      type="submit"
-                      className="bg-gradient sub-btn"
-                    >
+                    <button type="submit" className="bg-gradient sub-btn">
                       Add Vehicle
                     </button>
                     {err && <small className="err">{err}</small>}

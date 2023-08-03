@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Button, Img, Input, Line, List, Text } from "components";
 
@@ -14,6 +14,10 @@ const VehiclePage = () => {
   const token = currentUser ? currentUser?.data?.token : null;
   const { state, dispatch } = useContext(VehicleContext);
   const [err, setErr] = useState(null);
+  const [vehiclesLoading, setVehiclesLoading] = useState(false);
+  const [vehiclesError, setVehiclesError] = useState(null);
+  const [vehiclesList, setVehiclesList] = useState(null);
+  const [paging, setPaging] = useState(1);
 
   const handleChange = (e) => {
     dispatch({
@@ -29,42 +33,31 @@ const VehiclePage = () => {
   };
 
   const props = {
-    query: {},
     options: {
-      select: ["field 1", "field 2"],
-      collation: "",
-      sort: "",
-      populate: "",
-      projection: "",
-      lean: false,
-      leanWithId: true,
-      offset: 0,
-      page: 1,
-      limit: 10,
-      pagination: true,
-      useEstimatedCount: false,
-      useCustomCountFn: false,
-      forceCountFn: false,
-      read: {},
-      options: {},
+      page: paging,
     },
-    isCountOnly: false,
   };
 
-  const {
-    isLoading: vehiclesLoading,
-    error: vehiclesError,
-    data: vehiclesList,
-  } = useQuery({
-    queryKey: ["vehiclesList"],
-    queryFn: async () =>
-      await newRequest
-        .post(`/client/api/v1/vehicles/list`, {}, header)
-        .then((res) => {
-          return res.data;
-        }),
-  });
-  console.log(vehiclesList)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setVehiclesLoading(true);
+        const response = await newRequest.post(
+          `/client/api/v1/vehicles/list`,
+          props,
+          header
+        );
+        const data = response.data;
+        setVehiclesList(data);
+        setVehiclesLoading(false);
+      } catch (error) {
+        setVehiclesError(error);
+      }
+    };
+
+    fetchData();
+  }, [paging]);
+  console.log(vehiclesList);
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
@@ -77,7 +70,6 @@ const VehiclePage = () => {
   });
 
   const handleSubmit = async (e) => {
-    
     try {
       if (
         state.vin &&
@@ -87,7 +79,7 @@ const VehiclePage = () => {
         state.plate
       ) {
         await mutation.mutateAsync(state);
-      }else{
+      } else {
         setErr("Fields are empty");
         e.preventDefault();
       }
@@ -138,6 +130,23 @@ const VehiclePage = () => {
                           </div>
                         </div>
                       ))}
+                </div>
+                <div className="pagination">
+                  <button
+                    className="page-btn"
+                    disabled={paging <= 1}
+                    onClick={() => setPaging((prev) => prev - 1)}
+                  >
+                    Previews
+                  </button>
+                  <span>{vehiclesList?.data?.paginator?.currentPage}</span>
+                  <button
+                    className="page-btn"
+                    disabled={!vehiclesList?.data?.paginator?.hasNextPage}
+                    onClick={() => setPaging((prev) => prev + 1)}
+                  >
+                    Next
+                  </button>
                 </div>
               </div>
 

@@ -34,6 +34,7 @@ const ReportViewPage = () => {
           return res.data;
         }),
   });
+  console.log(report);
   
   const lat =
     Array.isArray(report?.data?.location) &&
@@ -69,7 +70,7 @@ const ReportViewPage = () => {
                 <div className="border border-blue-300 border-solid flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
-                    src="images/img_materialsymbolsbookmark.svg"
+                    src="/images/img_materialsymbolsbookmark.svg"
                     alt="materialsymbols"
                   />
                 </div>

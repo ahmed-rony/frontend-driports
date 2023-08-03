@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Img, Input, Line, List, Text } from "components";
 import "./Reports.scss";
 
@@ -11,6 +11,10 @@ import { Link } from "react-router-dom";
 const ReportsPage = () => {
   const { currentUser } = useContext(AuthContext);
   const token = currentUser ? currentUser?.data?.token : null;
+  const [reportsLoading, setReportsLoading] = useState(false);
+  const [reportsError, setReportsError] = useState(null);
+  const [reportsList, setReportsList] = useState(null);
+  const [paging, setPaging] = useState(1);
 
   const header = {
     headers: {
@@ -19,41 +23,45 @@ const ReportsPage = () => {
   };
 
   const props = {
-    query: {},
     options: {
-      select: ["field 1", "field 2"],
-      collation: "",
-      sort: "",
-      populate: "",
-      projection: "",
-      lean: false,
-      leanWithId: true,
-      offset: 0,
-      page: 1,
-      limit: 10,
-      pagination: true,
-      useEstimatedCount: false,
-      useCustomCountFn: false,
-      forceCountFn: false,
-      read: {},
-      options: {},
+      page: paging,
     },
-    isCountOnly: false,
   };
 
-  const {
-    isLoading: reportsLoading,
-    error: reportsError,
-    data: reportsList,
-  } = useQuery({
-    queryKey: ["reportsList"],
-    queryFn: async () =>
-      await newRequest
-        .post(`/client/api/v1/reports/list`, {}, header)
-        .then((res) => {
-          return res.data;
-        }),
-  });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setReportsLoading(true);
+        const response = await newRequest.post(
+          `/client/api/v1/reports/list`,
+          props,
+          header
+        );
+        const data = response.data;
+        setReportsList(data);
+        setReportsLoading(false);
+      } catch (error) {
+        setReportsError(error);
+      }
+    };
+
+    fetchData();
+  }, [paging]);
+
+  // const {
+  //   isLoading: reportsLoading,
+  //   error: reportsError,
+  //   data: reportsList,
+  // } = useQuery({
+  //   queryKey: ["reportsList"],
+  //   queryFn: async () =>
+  //     await newRequest
+  //       .post(`/client/api/v1/reports/list`, {}, header)
+  //       .then((res) => {
+  //         return res.data;
+  //       }),
+  // });
+  console.log(reportsList);
 
   return (
     <>
@@ -103,6 +111,23 @@ const ReportsPage = () => {
                         </Link>
                       </div>
                     ))}
+              </div>
+              <div className="pagination">
+                <button
+                  className="page-btn"
+                  disabled={paging <= 1}
+                  onClick={() => setPaging((prev) => prev - 1)}
+                >
+                  Previews
+                </button>
+                <span>{reportsList?.data?.paginator?.currentPage}</span>
+                <button
+                  className="page-btn"
+                  disabled={!reportsList?.data?.paginator?.hasNextPage}
+                  onClick={() => setPaging((prev) => prev + 1)}
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>
