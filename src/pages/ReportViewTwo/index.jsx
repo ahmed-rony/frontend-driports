@@ -60,13 +60,13 @@ const ReportViewTwoPage = () => {
         <div className="bg-white-A700 flex flex-1 flex-col items-center justify-end mb-7 md:ml-[0] ml-[13px] md:mt-0 mt-[9px] md:px-5 w-full">
           <div className="flex flex-col items-start justify-start mt-4 w-[96%] md:w-full">
             <div className="flex flex-row sm:gap-10 items-center justify-between w-full">
-              <div className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
+              <Link to={`/reportview/${report?.data?.id}`} className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
                 <Img
                   className="h-4 w-4"
                   src="/images/img_pajamasgoback.svg"
                   alt="pajamasgoback"
                 />
-              </div>
+              </Link>
               <List
                 className="sm:flex-col flex-row gap-[5px] grid grid-cols-2 w-[16%]"
                 orientation="horizontal"
@@ -78,13 +78,13 @@ const ReportViewTwoPage = () => {
                     alt="materialsymbols"
                   />
                 </div>
-                <div className="bg-blue-300 flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
+                <Link to={`/reportviewone/${report?.data?.id}`} className="bg-blue-300 flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
                     src="/images/img_mdishare.svg"
                     alt="mdishare"
                   />
-                </div>
+                </Link>
               </List>
             </div>
             <div className="h-[119px] mt-[18px] relative w-[84%] sm:w-full">
@@ -137,93 +137,33 @@ const ReportViewTwoPage = () => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-start md:ml-[0] ml-[33px] mt-[19px] w-[89%] md:w-full">
-              <div className="flex flex-col items-center justify-start w-full">
-                <div className="flex flex-col items-start justify-start w-full">
-                  <div className="flex flex-row items-center justify-between w-[85%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      Driver Name
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.driverName || "{ No Data }"}
-                    </Text>
-                  </div>
-                  <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      Plate
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.plate || "{ No Data }"}
-                    </Text>
-                  </div>
-                  <div className="flex flex-row items-center justify-between mt-[18px] w-[78%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      Brand
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.brand || "{ No Data }"}
-                    </Text>
-                  </div>
-                  <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
-                    <Text
-                      className="mb-0.5 text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      Model
-                    </Text>
-                    <Text
-                      className="mt-0.5 text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.model || "{ No Data }"}
-                    </Text>
-                  </div>
-                  <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      Year
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {getDateYear || "{ No Data }"}
-                    </Text>
-                  </div>
-                  <div className="flex flex-row items-center justify-between mt-[18px] w-[76%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      VIN
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.vin || "{ No Data }"}
-                    </Text>
-                  </div>
+              <div className="w-full">
+              <div className="report_details">
+                <div className="item">
+                  <span>Driver Name</span>
+                  <p>{report?.data?.driverName || "{ No Data }"}</p>
                 </div>
+                <div className="item">
+                  <span>Plate</span>
+                  <p>{report?.data?.plate || "{ No Data }"}</p>
+                </div>
+                <div className="item">
+                  <span>Brand</span>
+                  <p>{report?.data?.brand || "{ No Data }"}</p>
+                </div>
+                <div className="item">
+                  <span>Model</span>
+                  <p>{report?.data?.model || "{ No Data }"}</p>
+                </div>
+                <div className="item">
+                  <span>Year</span>
+                  <p>{getDateYear || "{ No Data }"}</p>
+                </div>
+                <div className="item">
+                  <span>VIN</span>
+                  <p>{report?.data?.vin || "{ No Data }"}</p>
+                </div>
+              </div>
               </div>
             </div>
             <Text

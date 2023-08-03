@@ -55,13 +55,13 @@ const ReportViewOnePage = () => {
         <div className="bg-white-A700 flex flex-1 flex-col items-center justify-start mb-7 md:ml-[0] ml-[13px] md:mt-0 mt-[9px] p-3.5 md:px-5 w-full">
           <div className="flex flex-col items-center justify-start my-1 w-full">
             <div className="flex flex-row sm:gap-10 items-center justify-between w-full">
-              <div className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
+              <Link to={`/reportviewtwo/${report?.data?.id}`} className="bg-blue-300 flex flex-col items-center justify-end p-2.5 rounded-[5px] w-[8%]">
                 <Img
                   className="h-4 w-4"
                   src="/images/img_pajamasgoback.svg"
                   alt="pajamasgoback"
                 />
-              </div>
+              </Link>
               <List
                 className="sm:flex-col flex-row gap-[5px] grid grid-cols-2 w-[16%]"
                 orientation="horizontal"
@@ -132,84 +132,30 @@ const ReportViewOnePage = () => {
               </div>
             </div>
             <div className="h-[253px] md:h-[268px] sm:h-[417px] mt-[21px] relative w-[84%] sm:w-full">
-              <div className="absolute flex flex-col h-max inset-[0] items-center justify-center m-auto w-full">
+              <div className="h-max inset-[0]  m-auto w-full">
+              <div className="report_details">
+                <div className="item">
+                  <span>Name</span>
+                  <p>{report?.data?.driverName || "{ No Data }"}</p>
+                </div>
+                <div className="item">
+                  <span>License number</span>
+                  <p>{report?.data?.licenseNumber || "{ No Data }"}</p>
+                </div>
+                <div className="item">
+                  <span>License expiration</span>
+                  <p>{report?.data?.licenseExp || "{ No Data }"}</p>
+                </div>
+                <div className="item">
+                  <span>Number of reports</span>
+                  <p>{report?.data?.count || "{ No Data }"}</p>
+                </div>
+                <div className="item">
+                  <span>Most reported imprudence</span>
+                  <p>{report?.data?.mostReport || "{ No Data }"}</p>
+                </div>
+              </div>
                 <div className="flex flex-col items-start justify-start w-full">
-                  <div className="flex flex-row items-center justify-between w-[89%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      Name
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.driverName || "{ No Data }"}
-                    </Text>
-                  </div>
-                  <div className="flex flex-row items-center justify-between mt-[18px] w-[88%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      License number
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.licenseNumber || "{ No Data }"}
-                    </Text>
-                  </div>
-                  <div className="flex sm:flex-col flex-row sm:gap-5 items-start justify-start mt-[19px] w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      License expiration
-                    </Text>
-                    <Text
-                      className="sm:ml-[0] ml-[143px] text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.licenseExp || "{ No Data }"}
-                    </Text>
-                    <Text
-                      className="ml-2.5 sm:ml-[0] sm:mt-0 mt-[5px] text-red-A700_01 text-sm"
-                      size="txtOutfitRegular14RedA70001"
-                    >
-                      Expire soon
-                    </Text>
-                  </div>
-                  <div className="flex flex-row items-start justify-between mt-[19px] w-[70%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      Number of reports
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.count || "{ No Data }"}
-                    </Text>
-                  </div>
-                  <div className="flex sm:flex-col flex-row sm:gap-10 gap-[66px] items-center justify-start mt-[19px] w-[91%] md:w-full">
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitBold20"
-                    >
-                      Most reported imprudence
-                    </Text>
-                    <Text
-                      className="text-gray-600_02 text-xl"
-                      size="txtOutfitRegular20"
-                    >
-                      {report?.data?.mostReport || "{ No Data }"}
-                    </Text>
-                  </div>
                   <Text
                     className="mt-3.5 text-gray-600_02 text-xl"
                     size="txtOutfitBold20"

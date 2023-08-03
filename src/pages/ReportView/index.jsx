@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Mapbox from "components/Mapbox/Mapbox";
+import './ReportView.scss';
 
 const ReportViewPage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -74,13 +75,13 @@ const ReportViewPage = () => {
                     alt="materialsymbols"
                   />
                 </div>
-                <div className="bg-blue-300 flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
+                <Link to={`/reportviewtwo/${report?.data?.id}`} className="bg-blue-300 flex flex-col items-center justify-start sm:ml-[0] p-1.5 rounded-[5px] w-full">
                   <Img
                     className="h-6 w-6"
                     src="/images/img_mdishare.svg"
                     alt="mdishare"
                   />
-                </div>
+                </Link>
               </List>
             </div>
             <div className="h-[119px] mt-[18px] relative w-[84%] sm:w-full">
@@ -131,79 +132,30 @@ const ReportViewPage = () => {
                 <Line className="bg-black-900_19 h-px w-full" />
               </div>
             </div>
-            <div className="flex flex-col items-center justify-start md:ml-[0] ml-[41px] mt-[18px] w-[86%] md:w-full">
-              <div className="flex flex-col items-start justify-start w-full">
-                <div className="flex flex-row items-center justify-between w-[85%] md:w-full">
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitBold20"
-                  >
-                    Reporter name
-                  </Text>
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitRegular20"
-                  >
-                    {report?.data?.profileName || "{ No Data }"}
-                  </Text>
+            <div className=" md:ml-[0] ml-[41px] mt-[18px] w-[86%] md:w-full">
+              <div className="report_details">
+                <div className="item">
+                  <span>Reporter Name</span>
+                  <p>{report?.data?.profileName || "{ No Data }"}</p>
                 </div>
-                <div className="flex flex-row items-center justify-between mt-[18px] w-[83%] md:w-full">
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitBold20"
-                  >
-                    Imprudence reported
-                  </Text>
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitRegular20"
-                  >
-                    {report?.data?.reportType || "{ No Data }"}
-                  </Text>
+                <div className="item">
+                  <span>Imprudence reported</span>
+                  <p>{report?.data?.reportType || "{ No Data }"}</p>
                 </div>
-                <div className="flex flex-row items-center justify-between mt-5 w-[87%] md:w-full">
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitBold20"
-                  >
-                    Location
-                  </Text>
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitRegular20"
-                  >
-                    {report?.data?.address || "{ No Data }"}
-                  </Text>
+                <div className="item">
+                  <span>Location</span>
+                  <p>{report?.data?.address || "{ No Data }"}</p>
                 </div>
-                <div className="flex flex-row items-center justify-between mt-5 w-[87%] md:w-full">
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitBold20"
-                  >
-                    Driver name
-                  </Text>
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitRegular20"
-                  >
-                    {report?.data?.driverName || "{ No Data }"}
-                  </Text>
+                <div className="item">
+                  <span>Driver name</span>
+                  <p>{report?.data?.driverName || "{ No Data }"}</p>
                 </div>
-                <div className="flex flex-row items-start justify-between mt-[19px] w-[81%] md:w-full">
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitBold20"
-                  >
-                    Vehicle plate
-                  </Text>
-                  <Text
-                    className="text-gray-600_02 text-xl"
-                    size="txtOutfitRegular20"
-                  >
-                    {report?.data?.plate || "{ No Data }"}
-                  </Text>
+                <div className="item">
+                  <span>Vehicle plate</span>
+                  <p>{report?.data?.plate || "{ No Data }"}</p>
                 </div>
               </div>
+              
             </div>
             <Text
               className="md:ml-[0] ml-[166px] mt-[15px] text-gray-600_02 text-xl"
